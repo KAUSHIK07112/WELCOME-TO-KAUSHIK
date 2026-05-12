@@ -1,0 +1,913 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kaushik Das - Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #1a1a2e;
+            --secondary: #0f3460;
+            --accent: #e94560;
+            --accent-light: #f39c12;
+            --text-primary: #ffffff;
+            --text-secondary: #d4d4d4;
+            --border: #2a2a4e;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #0f3460 100%);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Header & Navigation */
+        header {
+            position: sticky;
+            top: 0;
+            background: rgba(26, 26, 46, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            padding: 1rem 2rem;
+            z-index: 1000;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #e94560, #f39c12);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -0.5px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 6rem 2rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
+            gap: 4rem;
+            animation: fadeInDown 0.8s ease;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .hero-content h1 .highlight {
+            background: linear-gradient(135deg, #e94560, #f39c12);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-content p {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            line-height: 1.8;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 0.8rem 1.8rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 0.95rem;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #e94560, #f39c12);
+            color: white;
+            box-shadow: 0 10px 30px rgba(233, 69, 96, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(233, 69, 96, 0.4);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--accent);
+            border: 2px solid var(--accent);
+        }
+
+        .btn-secondary:hover {
+            background: var(--accent);
+            color: white;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1.2rem;
+            margin-top: 2rem;
+        }
+
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: var(--border);
+            color: var(--accent);
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .social-links a:hover {
+            background: var(--accent);
+            color: white;
+            transform: translateY(-5px);
+        }
+
+        .hero-visual {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .profile-card {
+            width: 280px;
+            height: 340px;
+            background: linear-gradient(135deg, rgba(233, 69, 96, 0.1) 0%, rgba(243, 156, 18, 0.1) 100%);
+            border: 2px solid var(--border);
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        .profile-avatar {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 1.5rem;
+            background: linear-gradient(135deg, #e94560, #f39c12);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+        }
+
+        .profile-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .profile-card p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .badge {
+            display: inline-block;
+            background: var(--accent);
+            padding: 0.4rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            margin: 0.3rem;
+            color: white;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        /* Sections */
+        section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 5rem 2rem;
+        }
+
+        section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            text-align: center;
+            position: relative;
+            display: inline-block;
+            width: 100%;
+        }
+
+        section h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(135deg, #e94560, #f39c12);
+            border-radius: 2px;
+        }
+
+        /* About Section */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin-top: 3rem;
+            align-items: center;
+        }
+
+        .about-text p {
+            margin-bottom: 1rem;
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+
+        .info-box {
+            background: rgba(233, 69, 96, 0.1);
+            border-left: 4px solid var(--accent);
+            padding: 1.5rem;
+            margin: 1rem 0;
+            border-radius: 8px;
+            backdrop-filter: blur(10px);
+        }
+
+        /* Skills Section */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .skill-card {
+            background: linear-gradient(135deg, rgba(233, 69, 96, 0.1) 0%, rgba(243, 156, 18, 0.05) 100%);
+            border: 1px solid var(--border);
+            padding: 2rem;
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent);
+            box-shadow: 0 20px 40px rgba(233, 69, 96, 0.2);
+        }
+
+        .skill-card h3 {
+            color: var(--accent);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .skill-list {
+            list-style: none;
+        }
+
+        .skill-list li {
+            padding: 0.5rem 0;
+            color: var(--text-secondary);
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .skill-list li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: var(--accent-light);
+        }
+
+        /* Experience Section */
+        .timeline {
+            position: relative;
+            padding: 2rem 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 100%;
+            background: linear-gradient(180deg, var(--accent) 0%, transparent 100%);
+        }
+
+        .experience-item {
+            margin-bottom: 3rem;
+            width: 45%;
+        }
+
+        .experience-item:nth-child(odd) {
+            margin-left: 0;
+            text-align: right;
+            padding-right: 3%;
+        }
+
+        .experience-item:nth-child(even) {
+            margin-left: 55%;
+            text-align: left;
+            padding-left: 3%;
+        }
+
+        .experience-item::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 16px;
+            height: 16px;
+            background: var(--accent);
+            border: 4px solid var(--primary);
+            border-radius: 50%;
+            margin-top: 0.5rem;
+        }
+
+        .exp-card {
+            background: rgba(233, 69, 96, 0.1);
+            border: 1px solid var(--border);
+            padding: 1.5rem;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+        }
+
+        .exp-card h3 {
+            color: var(--accent);
+            margin-bottom: 0.3rem;
+        }
+
+        .exp-date {
+            color: var(--accent-light);
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 0.8rem;
+        }
+
+        .exp-card p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        /* Achievements Section */
+        .achievements-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .achievement-card {
+            background: linear-gradient(135deg, rgba(243, 156, 18, 0.2) 0%, rgba(233, 69, 96, 0.1) 100%);
+            border: 1px solid var(--border);
+            padding: 2rem;
+            border-radius: 12px;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .achievement-card::before {
+            content: '★';
+            position: absolute;
+            top: -20px;
+            right: -20px;
+            font-size: 80px;
+            color: var(--accent);
+            opacity: 0.1;
+        }
+
+        .achievement-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(233, 69, 96, 0.3);
+        }
+
+        .achievement-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .achievement-card h3 {
+            color: var(--accent-light);
+            margin-bottom: 0.5rem;
+        }
+
+        .achievement-card p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* Contact Section */
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin-top: 3rem;
+            align-items: center;
+        }
+
+        .contact-info {
+            list-style: none;
+        }
+
+        .contact-info li {
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--border);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent);
+            font-size: 1.5rem;
+        }
+
+        .contact-info a {
+            color: var(--accent);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .contact-info a:hover {
+            color: var(--accent-light);
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group label {
+            margin-bottom: 0.5rem;
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            padding: 0.8rem 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--text-primary);
+            font-family: inherit;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+            background: rgba(233, 69, 96, 0.1);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(26, 26, 46, 0.5);
+            border-top: 1px solid var(--border);
+            padding: 2rem;
+            text-align: center;
+            color: var(--text-secondary);
+            margin-top: 5rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                gap: 1rem;
+                font-size: 0.85rem;
+            }
+
+            .hero {
+                grid-template-columns: 1fr;
+                padding: 3rem 1rem;
+            }
+
+            .hero-content h1 {
+                font-size: 2.2rem;
+            }
+
+            .hero-visual {
+                display: none;
+            }
+
+            section {
+                padding: 3rem 1rem;
+            }
+
+            .about-grid,
+            .contact-content {
+                grid-template-columns: 1fr;
+            }
+
+            .timeline::before {
+                left: 20px;
+            }
+
+            .experience-item,
+            .experience-item:nth-child(odd),
+            .experience-item:nth-child(even) {
+                width: 100%;
+                margin-left: 0;
+                text-align: left;
+                padding-left: 60px;
+                padding-right: 0;
+            }
+
+            .experience-item::before {
+                left: 0;
+            }
+
+            section h2 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav>
+            <div class="logo">KD</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#achievements">Achievements</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>Hi, I'm <span class="highlight">Kaushik Das</span></h1>
+            <p>A motivated BBA graduate with a strong background in Business Analytics. Passionate about leveraging data-driven insights, creative problem-solving, and leadership to drive business growth.</p>
+            <div class="cta-buttons">
+                <a href="#contact" class="btn btn-primary">Get In Touch</a>
+                <a href="https://www.linkedin.com/in/kaushik-das-23763821b" class="btn btn-secondary" target="_blank">View LinkedIn</a>
+            </div>
+            <div class="social-links">
+                <a href="mailto:sharmasoham781@gmail.com" title="Email">✉️</a>
+                <a href="https://www.linkedin.com/in/kaushik-das-23763821b" target="_blank" title="LinkedIn">💼</a>
+                <a href="tel:+916360034259" title="Call">📱</a>
+            </div>
+        </div>
+        <div class="hero-visual">
+            <div class="profile-card">
+                <div class="profile-avatar">👨‍💼</div>
+                <h3>Kaushik Das</h3>
+                <p>BBA Graduate | Business Analytics</p>
+                <p>Bengaluru, Karnataka</p>
+                <div>
+                    <span class="badge">CAT: 84%ile</span>
+                    <span class="badge">SNAP: 90%ile</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+        <h2>About Me</h2>
+        <div class="about-grid">
+            <div class="about-text">
+                <p>I'm a highly motivated BBA graduate from Kristu Jayanti College, Bangalore with a specialization in Business Analytics. Throughout my academic journey, I've developed a passion for understanding market dynamics and driving business solutions through data-driven insights.</p>
+                <div class="info-box">
+                    <strong>Education</strong><br>
+                    BBA - Kristu Jayanti College, Bangalore<br>
+                    Specialization: Business Analytics<br>
+                    Aggregate: 76.9%
+                </div>
+                <p>With hands-on experience in finance, HR, sales, and marketing, I've demonstrated strong leadership abilities and a commitment to excellence. I'm eager to apply my diverse skill set to contribute meaningfully to organizational goals while continuing to grow professionally.</p>
+            </div>
+            <div>
+                <div class="info-box">
+                    <strong>🎯 Key Achievements</strong>
+                    <p style="margin-top: 0.8rem;">✓ CAT 2024: 84 Percentile<br>
+                    ✓ SNAP 2024: 90 Percentile<br>
+                    ✓ IBPS PO Prelims 2025: Qualified<br>
+                    ✓ College Club Leader (300+ members)<br>
+                    ✓ Multiple Research Paper Awards</p>
+                </div>
+                <div class="info-box">
+                    <strong>📍 Location</strong><br>
+                    Bengaluru, Karnataka, India<br><br>
+                    <strong>📞 Contact</strong><br>
+                    +91-6360-0342-59<br>
+                    sharmasoham781@gmail.com
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills">
+        <h2>Skills & Expertise</h2>
+        <div class="skills-grid">
+            <div class="skill-card">
+                <h3>💻 Technical Skills</h3>
+                <ul class="skill-list">
+                    <li>Graphic Designing</li>
+                    <li>Advanced Microsoft Excel</li>
+                    <li>Python Fundamentals</li>
+                    <li>UI/UX Basics</li>
+                    <li>Data Analysis</li>
+                </ul>
+            </div>
+            <div class="skill-card">
+                <h3>🎯 Professional Skills</h3>
+                <ul class="skill-list">
+                    <li>Time Management</li>
+                    <li>Communication</li>
+                    <li>Problem-Solving</li>
+                    <li>Leadership</li>
+                    <li>Interpersonal Skills</li>
+                </ul>
+            </div>
+            <div class="skill-card">
+                <h3>📊 Business Skills</h3>
+                <ul class="skill-list">
+                    <li>Digital Marketing</li>
+                    <li>Consumer Relationship Mgmt</li>
+                    <li>Business Analytics</li>
+                    <li>Financial Analysis</li>
+                    <li>Market Research</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience">
+        <h2>Professional Experience</h2>
+        <div class="timeline">
+            <div class="experience-item">
+                <div class="exp-card">
+                    <h3>Finance Intern</h3>
+                    <div class="exp-date">June 2023 - July 2023</div>
+                    <p><strong>TATA MOTORS LTD</strong>, Jamshedpur</p>
+                    <p style="margin-top: 0.8rem;">Prepared detailed research presentation on "Benchmarking of TATA Motors and Its Competitors" focusing on financial performance analysis and competitive positioning.</p>
+                </div>
+            </div>
+
+            <div class="experience-item">
+                <div class="exp-card">
+                    <h3>HR & Sales Executive</h3>
+                    <div class="exp-date">March 2023 - May 2023</div>
+                    <p><strong>U-Square Clothing Brand</strong>, Bengaluru</p>
+                    <p style="margin-top: 0.8rem;">Led a team to achieve sales targets, managed employee coordination, and contributed to revenue growth through effective sales strategies and team leadership.</p>
+                </div>
+            </div>
+
+            <div class="experience-item">
+                <div class="exp-card">
+                    <h3>Marketing Executive</h3>
+                    <div class="exp-date">January 2022 - January 2023</div>
+                    <p><strong>Casa Ltd.</strong>, Indore</p>
+                    <p style="margin-top: 0.8rem;">Served as Creative Services Head, managed graphic design projects, coordinated with creative team, and developed marketing campaigns.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Achievements Section -->
+    <section id="achievements">
+        <h2>Achievements & Recognition</h2>
+        <div class="achievements-grid">
+            <div class="achievement-card">
+                <div class="achievement-icon">🏆</div>
+                <h3>Competition Exams</h3>
+                <p>CAT 2024: 84 percentile | SNAP 2024: 90 percentile | IBPS PO Prelims 2025: Qualified</p>
+            </div>
+            <div class="achievement-card">
+                <div class="achievement-icon">🎨</div>
+                <h3>Research & Innovation</h3>
+                <p>Best Research Paper Award at Samsodhan 23 | Real-time research on "AI in Modern Business"</p>
+            </div>
+            <div class="achievement-card">
+                <div class="achievement-icon">🥇</div>
+                <h3>Competition Success</h3>
+                <p>7 First, 4 Second, 3 Third prizes in intercollegiate events | 4th position in South East Zonal Fest</p>
+            </div>
+            <div class="achievement-card">
+                <div class="achievement-icon">👥</div>
+                <h3>Leadership</h3>
+                <p>Fine Arts Club Secretary (300+ members) | DHATRI PATRA Foundation Coordinator | National Event Head</p>
+            </div>
+            <div class="achievement-card">
+                <div class="achievement-icon">🎭</div>
+                <h3>Cultural Excellence</h3>
+                <p>2 First prizes & 1 Second prize in UTHAROTSAVA cultural fest | Business Workshop Virtuoso: 1st Prize</p>
+            </div>
+            <div class="achievement-card">
+                <div class="achievement-icon">🎯</div>
+                <h3>Educational Excellence</h3>
+                <p>BBA Aggregate: 76.9% | HSC: 89.9% | SSC: 81.8% from Vidya Bharti Chinmaya Vidyalaya</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <h2>Get In Touch</h2>
+        <div class="contact-content">
+            <div>
+                <ul class="contact-info">
+                    <li>
+                        <div class="contact-icon">📧</div>
+                        <div>
+                            <strong>Email</strong><br>
+                            <a href="mailto:sharmasoham781@gmail.com">sharmasoham781@gmail.com</a>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="contact-icon">📱</div>
+                        <div>
+                            <strong>Phone</strong><br>
+                            <a href="tel:+916360034259">+91-6360-0342-59</a>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="contact-icon">📍</div>
+                        <div>
+                            <strong>Location</strong><br>
+                            Bengaluru, Karnataka, India
+                        </div>
+                    </li>
+                    <li>
+                        <div class="contact-icon">💼</div>
+                        <div>
+                            <strong>LinkedIn</strong><br>
+                            <a href="https://www.linkedin.com/in/kaushik-das-23763821b" target="_blank">View Profile</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <form class="contact-form">
+                <div class="form-group">
+                    <label for="name">Your Name</label>
+                    <input type="text" id="name" placeholder="Enter your name">
+                </div>
+                <div class="form-group">
+                    <label for="email">Your Email</label>
+                    <input type="email" id="email" placeholder="your@email.com">
+                </div>
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" placeholder="Your message here..."></textarea>
+                </div>
+                <button class="btn btn-primary">Send Message</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Kaushik Das. All rights reserved. | <a href="#" style="color: var(--accent);">Privacy Policy</a> | <a href="#" style="color: var(--accent);">Terms of Service</a></p>
+    </footer>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Contact form handling
+        document.querySelector('.contact-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Thank you for your message! I will get back to you soon.');
+            this.reset();
+        });
+
+        // Intersection observer for fade-in animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animation = 'fadeInDown 0.6s ease forwards';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.skill-card, .achievement-card, .exp-card').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
